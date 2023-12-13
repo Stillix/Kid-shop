@@ -1,0 +1,48 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+header {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 15px 0;
+}
+h1 {
+    margin: 0;
+}
+.candidates {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+}
+.candidate {
+    width: 300px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 15px;
+    padding: 15px;
+}
+.candidate img {
+    width: 100%;
+    border-radius: 6px;
+}
+.candidate h2 {
+    margin-top: 10px;
+}
+.candidate p {
+    margin: 10px 0;
+}
+.candidate .description {
+    font-style: italic;
+}
+.candidate a {
+    display: block;
+    margin-top: 10px;
+    text-decoration: none;
+    color: #333;
+}

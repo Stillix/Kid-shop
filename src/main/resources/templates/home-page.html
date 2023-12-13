@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная страница</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <style>
+        html,
+        body,
+        header,
+        .view {
+            height: 100%;
+        }
+
+        @media (max-width: 740px) {
+            html,
+            body,
+            header,
+            .view {
+                height: 1000px;
+            }
+        }
+
+        @media (min-width: 800px) and (max-width: 850px) {
+            html,
+            body,
+            header,
+            .view {
+                height: 600px;
+            }
+        }
+
+        h6 {
+            line-height: 1.7;
+            color: white;
+        }
+
+        .rgba-gradient {
+            background: -moz-linear-gradient(45deg, rgba(42, 27, 161, 0.7), rgba(29, 210, 177, 0.7) 100%);
+            background: -webkit-linear-gradient(45deg, rgba(42, 27, 161, 0.7), rgba(29, 210, 177, 0.7) 100%);
+            background: -webkit-gradient(linear, 45deg, from(rgba(42, 27, 161, 0.7)), to(rgba(29, 210, 177, 0.7)));
+            background: -o-linear-gradient(45deg, rgba(42, 27, 161, 0.7), rgba(29, 210, 177, 0.7) 100%);
+            background: linear-gradient(to 45deg, rgba(42, 27, 161, 0.7), rgba(29, 210, 177, 0.7) 100%);
+        }
+    </style>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar">
+        <div class="container">
+            <a class="navbar-brand" th:href="@{/cv-service}">
+                <strong style="font-size: 20px">CV-SERVICE</strong>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7"
+                    aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" th:href="@{/cv-service}"><span
+                                style="color:ghostwhite"><b>Home</b></span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/cv-service/about}"><span style="color: ghostwhite"><b>About</b></span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/cv-service/contacts}"><span style="color: ghostwhite"><b>Contacts</b></span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="view"
+         style="background-image: url('https://mdbootstrap.com/img/Photos/Others/architecture.webp'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+        <div class="mask rgba-gradient align-items-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 white-text text-center text-md-left mt-xl-5 mb-5 wow fadeInLeft"
+                         data-wow-delay="0.3s">
+                        <h1 class="h1-responsive font-weight-bold mt-sm-5"><span style="color: navajowhite">Вы зашли на сервис для управления
+                            кандидатами</span></h1>
+                        <hr class="p-1 bg-dark w-100">
+                        <h6 class="mb-4"><b>МЕНЮ</b></h6>
+                        <form action="/cv-service/candidates" class="mb-3">
+                            <button type="submit" class="btn btn-success btn-rounded" style="padding: 15px">Кандидаты
+                            </button>
+                        </form>
+                        <form action="/cv-service/directions?page=1" class="mb-3">
+                            <button type="submit" class="btn btn-light btn-rounded" style="padding: 15px">Направления
+                            </button>
+                        </form>
+                        <form action="/cv-service/tests">
+                            <button type="submit" class="btn btn-warning btn-rounded" style="padding: 15px">Тесты
+                            </button>
+                        </form>
+                        <br>
+                        <form action="/cv-service/test-results">
+                            <button type="submit" class="btn btn-dark btn-rounded" style="padding: 15px">Результы
+                                тестов
+                            </button>
+                        </form>
+                    </div>
+                    <div class="col-md-6 col-xl-5 mt-xl-5 wow fadeInRight" data-wow-delay="0.3s">
+                        <img src="https://mdbootstrap.com/img/Mockups/Transparent/Small/admin-new.webp" alt=""
+                             class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<main>
+    <div class="container">
+        <div class="row py-5">
+            <div class="col-md-12 text">
+                <p>Belarus, Minsk
+                    <span style="float: right">Developed by Dorogokupets</span>
+                    <br> <b>Contacts</b>
+                    <br>ilyadorogokupets@yahoo.com
+                </p>
+            </div>
+        </div>
+    </div>
+</main>
+
+</body>
+</html>

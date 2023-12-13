@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Список кандидатов</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 15px 0;
+        }
+
+        h1 {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 11px 0;
+            margin: 0;
+        }
+
+        .candidates {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .candidate {
+            width: 300px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin: 15px;
+            padding: 15px;
+        }
+
+        .candidate img {
+            width: 100%;
+            border-radius: 6px;
+        }
+
+        .candidate h2 {
+            margin-top: 10px;
+        }
+
+        .candidate p {
+            margin: 10px 0;
+        }
+
+        .candidate .description {
+            font-style: italic;
+        }
+
+        .candidate a {
+            display: block;
+            margin-top: 10px;
+            text-decoration: none;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+<header style="color: #007bff">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar" style="background-color:#007bff ">
+        <div class="container">
+            <a class="navbar-brand" th:href="@{/cv-service}">
+                <strong style="font-size: 20px">CV-SERVICE</strong>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7"
+                    aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" th:href="@{/cv-service}"><span
+                                style="color:ghostwhite"><b>Home</b></span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/cv-service/about}"><span style="color: ghostwhite"><b>About</b></span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/cv-service/contacts}"><span style="color: ghostwhite"><b>Contacts</b></span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+<br>
+<h1 style="color: white;">Список кандидатов</h1>
+<p><a class="btn btn-primary" href="/cv-service/candidate/new" style="background-color: lightgreen; border-color: black; color: white">Add candidate</a></p>
+<div th:if="${message}" class="alert alert-success text-center">
+    [[${message}]]
+</div>
+<div class="candidates">
+    <div th:each="candidateDto : ${candidatePage}">
+        <div class="candidate">
+            <img th:src="@{'/cv-service/images/' + ${candidateDto.candidateId}}" alt="Фото кандидата">
+            <h2 th:text="${candidateDto.lastName + ' ' + candidateDto.firstName + ' ' + candidateDto.patronymic}"></h2>
+            <p class="description" th:text="${candidateDto.description}"></p>
+            <p><a th:href="@{'/cv-service/download-file/' + ${candidateDto.candidateId}}">Скачать CV</a></p>
+            <p>Направление</p>
+            <p class="direction" th:text="${candidateDto.direction}"></p>
+            <a th:href="@{'/cv-service/candidate/edit/' + ${candidateDto.candidateId}}" class="btn btn-primary">Редактировать</a>
+        </div>
+    </div>
+</div>
+
+<nav aria-label="Pagination" th:if="${candidatePage.totalPages gt 0}">
+    <ul class="pagination justify-content-center font-weight-bold">
+        <li class="page-item" th:classappend="${i eq candidatePage.number + 1} ? 'active'"
+            th:each="i : ${#numbers.sequence( 1, candidatePage.totalPages, 1)}">
+            <a class="page-link" th:href="@{/cv-service/candidates?page={id}(id=${i})}" th:text="${i}"
+               th:title="${'Page '+ i}" data-toggle="tooltip"></a>
+        </li>
+    </ul>
+</nav>
+</body>
+</html>

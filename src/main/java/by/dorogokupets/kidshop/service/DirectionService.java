@@ -1,7 +1,5 @@
 package by.dorogokupets.kidshop.service;
 
-import by.dorogokupets.kidshop.domain.model.Direction;
-import by.dorogokupets.kidshop.domain.dto.DirectionDto;
 import org.springframework.data.domain.Page;
 
 import java.util.List;

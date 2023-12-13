@@ -1,6 +1,6 @@
 package by.dorogokupets.kidshop.service.impl;
 
-import by.dorogokupets.kidshop.domain.model.Candidate;
+import by.dorogokupets.kidshop.domain.model.User;
 import by.dorogokupets.kidshop.domain.model.FileDB;
 import by.dorogokupets.kidshop.repository.FilesRepository;
 import by.dorogokupets.kidshop.service.FilesService;
@@ -21,7 +21,7 @@ public class FilesServiceImpl implements FilesService {
   }
 
   @Override
-  public FileDB findByCandidateAndContentType(Candidate candidate, String contentType) {
-    return filesRepository.findByCandidateAndContentType(candidate, contentType);
+  public FileDB findByCandidateAndContentType(User user, String contentType) {
+    return filesRepository.findByCandidateAndContentType(user, contentType);
   }
 }

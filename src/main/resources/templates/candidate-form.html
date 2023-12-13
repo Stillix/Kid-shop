@@ -110,7 +110,7 @@
     </nav>
 </header><br><br>
 <h1>Добавить кандидата</h1>
-<form th:object="${candidateDto}" method="post" action="/cv-service/candidate/save" enctype="multipart/form-data">
+<form th:object="${candidateDto}" method="post" action="/cv-service/user/save" enctype="multipart/form-data">
     <label for="firstName">Имя:</label>
     <input type="text" id="firstName" th:field="*{firstName}" required/><br/>
     <label for="lastName">Фамилия:</label>

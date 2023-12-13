@@ -1,9 +1,9 @@
 package by.dorogokupets.kidshop.service.impl;
 
 import by.dorogokupets.kidshop.domain.dto.CandidateDto;
+import by.dorogokupets.kidshop.domain.model.User;
 import by.dorogokupets.kidshop.exception.ServiceException;
 import by.dorogokupets.kidshop.mapper.CandidateMapper;
-import by.dorogokupets.kidshop.domain.model.Candidate;
 import by.dorogokupets.kidshop.domain.model.FileDB;
 import by.dorogokupets.kidshop.repository.FilesRepository;
 import by.dorogokupets.kidshop.service.CandidateService;
@@ -36,7 +36,7 @@ public class CandidateServiceImpl implements CandidateService {
   }
 
   @Override
-  public Page<Candidate> findAll(int pageNo, int pageSize, String sortBy, String sortDirection) {
+  public Page<User> findAll(int pageNo, int pageSize, String sortBy, String sortDirection) {
     Sort sort = Sort.by(Sort.Direction.fromString(sortDirection), sortBy);
     Pageable pageable = PageRequest.of(pageNo, pageSize, sort);
     return candidateRepository.findAll(pageable);
@@ -45,15 +45,15 @@ public class CandidateServiceImpl implements CandidateService {
   @Override
   @Transactional(rollbackFor = Exception.class)
   public void save(CandidateDto candidateDto) throws ServiceException {
-    Candidate candidate = candidateMapper.mapToCandidate(candidateDto);
+    User user = candidateMapper.mapToCandidate(candidateDto);
 
     FileDB cvFileDb = convertToFileDB(candidateDto.getCvFile());
     FileDB imageFileDb = convertToFileDB(candidateDto.getPhoto());
 
-    Candidate savedCandidate = candidateRepository.save(candidate);
+    User savedUser = candidateRepository.save(user);
 
-    cvFileDb.setCandidate(savedCandidate);
-    imageFileDb.setCandidate(savedCandidate);
+    cvFileDb.setUser(savedUser);
+    imageFileDb.setUser(savedUser);
 
     filesRepository.save(cvFileDb);
     filesRepository.save(imageFileDb);
@@ -79,26 +79,26 @@ public class CandidateServiceImpl implements CandidateService {
 
   @Override
   public CandidateDto findCandidateDtoById(Long id) {
-    Optional<Candidate> candidate = candidateRepository.findById(id);
+    Optional<User> candidate = candidateRepository.findById(id);
     return candidate.map(candidateMapper::mapToCandidateDTO).orElse(null);
   }
 
   @Override
-  public Candidate findCandidateById(Long candidateId) {
+  public User findCandidateById(Long candidateId) {
     return candidateRepository.findById(candidateId).orElse(null);
   }
 
   @Override
   @Transactional(rollbackFor = Exception.class)
   public void update(CandidateDto candidateDto) throws ServiceException {
-    Candidate currentCandidate = candidateRepository.getReferenceById(candidateDto.getCandidateId());
-    currentCandidate.setDescription(candidateDto.getDescription());
-    currentCandidate.setPatronymic(candidateDto.getPatronymic());
-    currentCandidate.setFirstName(candidateDto.getFirstName());
-    currentCandidate.setLastName(candidateDto.getLastName());
-    currentCandidate.setDirection(candidateDto.getDirection());
-    FileDB cvFile = filesRepository.findByCandidateAndContentType(currentCandidate, MediaType.APPLICATION_PDF_VALUE);
-    FileDB image = filesRepository.findByCandidateAndContentType(currentCandidate, MediaType.IMAGE_PNG_VALUE);
+    User currentUser = candidateRepository.getReferenceById(candidateDto.getCandidateId());
+    currentUser.setDescription(candidateDto.getDescription());
+    currentUser.setPatronymic(candidateDto.getPatronymic());
+    currentUser.setFirstName(candidateDto.getFirstName());
+    currentUser.setLastName(candidateDto.getLastName());
+    currentUser.setDirection(candidateDto.getDirection());
+    FileDB cvFile = filesRepository.findByCandidateAndContentType(currentUser, MediaType.APPLICATION_PDF_VALUE);
+    FileDB image = filesRepository.findByCandidateAndContentType(currentUser, MediaType.IMAGE_PNG_VALUE);
 
     MultipartFile cvFileToUpdate = candidateDto.getCvFile();
     MultipartFile imageFileToUpdate = candidateDto.getPhoto();
@@ -106,7 +106,7 @@ public class CandidateServiceImpl implements CandidateService {
     if (cvFileToUpdate != null) {
       if (cvFile == null) {
         cvFile = convertToFileDB(cvFileToUpdate);
-        cvFile.setCandidate(currentCandidate);
+        cvFile.setUser(currentUser);
       } else {
         updateFileDB(cvFile, cvFileToUpdate);
       }
@@ -116,13 +116,13 @@ public class CandidateServiceImpl implements CandidateService {
     if (imageFileToUpdate != null) {
       if (image == null) {
         image = convertToFileDB(imageFileToUpdate);
-        image.setCandidate(currentCandidate);
+        image.setUser(currentUser);
       } else {
         updateFileDB(image, imageFileToUpdate);
       }
       filesRepository.save(image);
     }
-    candidateRepository.save(currentCandidate);
+    candidateRepository.save(currentUser);
   }
 
   private void updateFileDB(FileDB fileDB, MultipartFile fileToUpdate) throws ServiceException {

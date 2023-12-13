@@ -1,6 +1,6 @@
 package by.dorogokupets.kidshop.controller;
 
-import by.dorogokupets.kidshop.domain.model.Candidate;
+import by.dorogokupets.kidshop.domain.model.User;
 import by.dorogokupets.kidshop.domain.model.FileDB;
 import by.dorogokupets.kidshop.service.CandidateService;
 import by.dorogokupets.kidshop.service.FilesService;
@@ -29,8 +29,8 @@ public class FilesController {
 
   @GetMapping("/download-file/{id}")
   public ResponseEntity<byte[]> getPdfFile(@PathVariable("id") Long candidateId) {
-    Candidate candidate = candidateService.findCandidateById(candidateId);
-    FileDB file = filesService.findByCandidateAndContentType(candidate, MediaType.APPLICATION_PDF_VALUE);
+    User user = candidateService.findCandidateById(candidateId);
+    FileDB file = filesService.findByCandidateAndContentType(user, MediaType.APPLICATION_PDF_VALUE);
 
     return ResponseEntity.ok()
             .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getName() + "\"")
@@ -40,8 +40,8 @@ public class FilesController {
 
   @GetMapping(path = "/images/{id}")
   public ResponseEntity downloadImage(@PathVariable("id") Long candidateId) {
-    Candidate candidate = candidateService.findCandidateById(candidateId);
-    FileDB file = filesService.findByCandidateAndContentType(candidate, MediaType.IMAGE_PNG_VALUE);
+    User user = candidateService.findCandidateById(candidateId);
+    FileDB file = filesService.findByCandidateAndContentType(user, MediaType.IMAGE_PNG_VALUE);
 
     return ResponseEntity.ok()
             .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getName() + "\"")

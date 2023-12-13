@@ -2,7 +2,7 @@ package by.dorogokupets.kidshop.mapper;
 
 
 import by.dorogokupets.kidshop.domain.dto.CandidateDto;
-import by.dorogokupets.kidshop.domain.model.Candidate;
+import by.dorogokupets.kidshop.domain.model.User;
 import org.mapstruct.Mapper;
 import org.springframework.stereotype.Component;
 
@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 @Component
 public interface CandidateMapper {
 
-  CandidateDto mapToCandidateDTO(Candidate candidate);
+  CandidateDto mapToCandidateDTO(User user);
 
-  Candidate mapToCandidate(CandidateDto candidateDto);
+  User mapToCandidate(CandidateDto candidateDto);
 
 }

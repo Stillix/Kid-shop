@@ -1,10 +1,6 @@
 package by.dorogokupets.kidshop.service.impl;
 
-import by.dorogokupets.kidshop.domain.dto.DirectionDto;
-import by.dorogokupets.kidshop.mapper.DirectionMapper;
-import by.dorogokupets.kidshop.domain.model.Direction;
 import by.dorogokupets.kidshop.service.DirectionService;
-import by.dorogokupets.kidshop.repository.DirectionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

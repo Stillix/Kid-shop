@@ -2,7 +2,7 @@ package by.dorogokupets.kidshop.controller;
 
 import by.dorogokupets.kidshop.domain.dto.CandidateDto;
 import by.dorogokupets.kidshop.exception.ServiceException;
-import by.dorogokupets.kidshop.domain.model.Candidate;
+import by.dorogokupets.kidshop.domain.model.User;
 import by.dorogokupets.kidshop.service.CandidateService;
 import by.dorogokupets.kidshop.service.DirectionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +32,7 @@ public class CandidateController {
           @RequestParam(defaultValue = "ASC") String sortDirection,
           Model model
   ) {
-    Page<Candidate> candidatePage = candidateService.findAll(page - 1, 8, sortBy, sortDirection);
+    Page<User> candidatePage = candidateService.findAll(page - 1, 8, sortBy, sortDirection);
     model.addAttribute(RequestAttributeName.CANDIDATE_PAGE, candidatePage);
     return "candidates";
   }

@@ -35,7 +35,7 @@
             padding: 20px;
         }
 
-        .candidate {
+        .user {
             width: 300px;
             background-color: #fff;
             border-radius: 8px;
@@ -44,24 +44,24 @@
             padding: 15px;
         }
 
-        .candidate img {
+        .user img {
             width: 100%;
             border-radius: 6px;
         }
 
-        .candidate h2 {
+        .user h2 {
             margin-top: 10px;
         }
 
-        .candidate p {
+        .user p {
             margin: 10px 0;
         }
 
-        .candidate .description {
+        .user .description {
             font-style: italic;
         }
 
-        .candidate a {
+        .user a {
             display: block;
             margin-top: 10px;
             text-decoration: none;
@@ -99,20 +99,20 @@
 </header>
 <br>
 <h1 style="color: white;">Список кандидатов</h1>
-<p><a class="btn btn-primary" href="/cv-service/candidate/new" style="background-color: lightgreen; border-color: black; color: white">Add candidate</a></p>
+<p><a class="btn btn-primary" href="/cv-service/user/new" style="background-color: lightgreen; border-color: black; color: white">Add user</a></p>
 <div th:if="${message}" class="alert alert-success text-center">
     [[${message}]]
 </div>
 <div class="candidates">
     <div th:each="candidateDto : ${candidatePage}">
-        <div class="candidate">
+        <div class="user">
             <img th:src="@{'/cv-service/images/' + ${candidateDto.candidateId}}" alt="Фото кандидата">
             <h2 th:text="${candidateDto.lastName + ' ' + candidateDto.firstName + ' ' + candidateDto.patronymic}"></h2>
             <p class="description" th:text="${candidateDto.description}"></p>
             <p><a th:href="@{'/cv-service/download-file/' + ${candidateDto.candidateId}}">Скачать CV</a></p>
             <p>Направление</p>
             <p class="direction" th:text="${candidateDto.direction}"></p>
-            <a th:href="@{'/cv-service/candidate/edit/' + ${candidateDto.candidateId}}" class="btn btn-primary">Редактировать</a>
+            <a th:href="@{'/cv-service/user/edit/' + ${candidateDto.candidateId}}" class="btn btn-primary">Редактировать</a>
         </div>
     </div>
 </div>
